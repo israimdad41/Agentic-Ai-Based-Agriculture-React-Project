@@ -222,7 +222,7 @@ function Recommendation({ farmData, onBack }) {
             <span>Alternative options</span>
 
             <h2>
-              Other Suitable Varieties
+              Other Suitable Varieties []
             </h2>
 
           </div>
