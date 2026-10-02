@@ -1,0 +1,32 @@
+.map-page {
+  background: #ffffff;
+  border: 1px solid #dfe9e3;
+  border-radius: 14px;
+  padding: 15px;
+}
+
+.map-heading span {
+  color: #13804e;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.map-heading h2 {
+  margin: 5px 0;
+  font-size: 21px;
+  color: #193d2c;
+}
+
+.map-heading p {
+  margin: 0 0 12px;
+  font-size: 10px;
+  color: #718078;
+}
+
+.sindh-map {
+  height: 380px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}

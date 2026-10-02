@@ -1,0 +1,5 @@
+id,crop,variety,soil_type,ph_min,ph_max,water_requirement,season,temperature_min,temperature_max,rainfall_min,rainfall_max,growing_days,region,yield_potential
+1,Wheat,IV-2,,,,5-6 irrigations,Rabi,,,,,120,Whole Sindh,6919
+2,Wheat,IV-3,,,,5-6 irrigations,Rabi,,,,,125,Whole Sindh,7413
+3,Wheat,MPT-14,,,,5-6 irrigations normal; 4-5 late,Rabi,,,,,124,Whole Sindh / Dubari,6919
+4,Wheat,E-107,,,,5-6 irrigations normal; 4-5 late,Rabi,,,,,118,Whole Sindh / Dubari,6919
