@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import SindhMap from "./SindhMap";
+
+import LeafScan from "./LeafScan";
 import AIAssistant from "./AIAssistant";
 import Compare from "./Compare";
 import VarietyDetails from "./VarietyDetails";
@@ -182,6 +183,7 @@ function App() {
   const [selectedVariety, setSelectedVariety] = useState(null);
   const [showCompare, setShowCompare] = useState(false);
   const [showAssistant, setShowAssistant] = useState(false);
+  const [showLeafScan, setShowLeafScan] = useState(false);
   const [language, setLanguage] = useState("en");
   const [search, setSearch] = useState("");
 
@@ -231,6 +233,9 @@ function App() {
         onBack={() => setSelectedVariety(null)}
       />
     );
+  }
+    if (showLeafScan) {
+    return <LeafScan onBack={() => setShowLeafScan(false)} />;
   }
 
   if (showCompare) {
@@ -344,9 +349,9 @@ function App() {
             <span className="nav-icon"><IconChart /></span>
             <span>{t.profit}</span>
           </a>
-          <a href="#map" onClick={(e) => goTo(e, () => scrollToId("map"))}>
-            <span className="nav-icon">🗺️</span>
-            <span>Sindh Variety Map</span>
+                    <a href="#leaf-scan" onClick={(e) => goTo(e, () => setShowLeafScan(true))}>
+            <span className="nav-icon">🍃</span>
+            <span>Leaf Disease Check</span>
           </a>
           <a href="#my-farm" onClick={(e) => goTo(e, () => setShowForm(true))}>
             <span className="nav-icon"><IconTarget /></span>
@@ -559,15 +564,24 @@ function App() {
             ))}
           </div>
 
-          {/* ============ SINDH MAP ============ */}
-          <div className="section-head" id="map">
+                    {/* ============ LEAF DISEASE CHECK ============ */}
+          <div className="section-head" id="leaf-scan">
             <div>
-              <span className="label">Regional Data</span>
-              <h2>Sindh Variety Map</h2>
+              <span className="label">Crop health</span>
+              <h2>Leaf Disease Check</h2>
             </div>
           </div>
-          <section className="panel">
-            <SindhMap />
+          <section className="scan-promo">
+            <div>
+              <strong>Pattay ki photo se bimari pehchanein</strong>
+              <p>
+                Apne fasal ke patte ki photo upload karein aur bimari ka
+                andaza, nishaniyan aur ehtiyat dekhein.
+              </p>
+            </div>
+            <button onClick={() => setShowLeafScan(true)}>
+              Scan a leaf →
+            </button>
           </section>
 
           {/* ============ CTA ============ */}

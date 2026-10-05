@@ -1,36 +1,43 @@
-import Recommendation from "./Recommendation";
 import { useState } from "react";
+import Recommendation from "./Recommendation";
 import { IconLeaf, IconArrowLeft, IconSparkle, IconArrow } from "./Icons";
 import "./FarmerForm.css";
 
+const emptyForm = {
+  location: "",
+  landArea: "",
+  soilType: "",
+  soilPH: "",
+  nitrogen: "",
+  phosphorus: "",
+  potassium: "",
+  water: "",
+  season: "",
+  temperature: "",
+  rainfall: "",
+};
+
 function FarmerForm({ onBack }) {
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState(emptyForm);
 
-  const [formData, setFormData] = useState({
-    location: "",
-    landArea: "",
-    soilType: "",
-    soilPH: "",
-    nitrogen: "",
-    phosphorus: "",
-    potassium: "",
-    water: "",
-    season: "",
-    temperature: "",
-    rainfall: "",
-  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    try {
+      localStorage.setItem("cropgenFarmData", JSON.stringify(formData));
+    } catch (error) {
+      // storage band ho to bhi recommendation dikha do
+    }
+
     setSubmitted(true);
-  
- localStorage.setItem(
-    "cropgenFarmData",
-    JSON.stringify(formData)
-  );
-   setSubmitted(true);
-};
+  };
+
   if (submitted) {
     return (
       <Recommendation
@@ -42,7 +49,6 @@ function FarmerForm({ onBack }) {
 
   return (
     <div className="form-page">
-
       <div className="form-header">
         <button className="back-btn" onClick={onBack}>
           <IconArrowLeft /> Back
@@ -57,7 +63,6 @@ function FarmerForm({ onBack }) {
       </div>
 
       <div className="form-container">
-
         <div className="form-intro">
           <span>Farm analysis</span>
 
@@ -66,20 +71,16 @@ function FarmerForm({ onBack }) {
           </h1>
 
           <p>
-            Enter your field conditions and CropGen AI will analyze
-            them to find the most suitable crop and variety.
+            Enter your field conditions and CropGen AI will analyze them to
+            find the most suitable crop and variety.
           </p>
         </div>
 
         <form onSubmit={handleSubmit}>
-
           {/* FARM INFORMATION */}
-
           <div className="form-section">
-
             <div className="section-title">
               <span>01</span>
-
               <div>
                 <h2>Farm Information</h2>
                 <p>Basic information about your farm</p>
@@ -87,11 +88,10 @@ function FarmerForm({ onBack }) {
             </div>
 
             <div className="form-grid">
-
               <div className="input-group">
-                <label>Farm Location</label>
-
+                <label htmlFor="location">Farm Location</label>
                 <input
+                  id="location"
                   type="text"
                   name="location"
                   placeholder="e.g. Nawabshah, Sindh"
@@ -102,10 +102,12 @@ function FarmerForm({ onBack }) {
               </div>
 
               <div className="input-group">
-                <label>Land Area (acres)</label>
-
+                <label htmlFor="landArea">Land Area (acres)</label>
                 <input
+                  id="landArea"
                   type="number"
+                  min="0"
+                  step="any"
                   name="landArea"
                   placeholder="e.g. 5"
                   value={formData.landArea}
@@ -115,26 +117,24 @@ function FarmerForm({ onBack }) {
               </div>
 
               <div className="input-group">
-                <label>Season</label>
-
+                <label htmlFor="season">Season</label>
                 <select
+                  id="season"
                   name="season"
                   value={formData.season}
                   onChange={handleChange}
                   required
                 >
                   <option value="">Select season</option>
-                  <option value="Kharif">Kharif</option>
                   <option value="Rabi">Rabi</option>
-                  <option value="Summer">Summer</option>
-                  <option value="Winter">Winter</option>
+                  <option value="Kharif">Kharif</option>
                 </select>
               </div>
 
               <div className="input-group">
-                <label>Water Availability</label>
-
+                <label htmlFor="water">Water Availability</label>
                 <select
+                  id="water"
                   name="water"
                   value={formData.water}
                   onChange={handleChange}
@@ -146,18 +146,13 @@ function FarmerForm({ onBack }) {
                   <option value="High">High</option>
                 </select>
               </div>
-
             </div>
           </div>
 
-
           {/* SOIL INFORMATION */}
-
           <div className="form-section">
-
             <div className="section-title">
               <span>02</span>
-
               <div>
                 <h2>Soil Information</h2>
                 <p>Provide your soil conditions</p>
@@ -165,11 +160,10 @@ function FarmerForm({ onBack }) {
             </div>
 
             <div className="form-grid">
-
               <div className="input-group">
-                <label>Soil Type</label>
-
+                <label htmlFor="soilType">Soil Type</label>
                 <select
+                  id="soilType"
                   name="soilType"
                   value={formData.soilType}
                   onChange={handleChange}
@@ -186,10 +180,12 @@ function FarmerForm({ onBack }) {
               </div>
 
               <div className="input-group">
-                <label>Soil pH</label>
-
+                <label htmlFor="soilPH">Soil pH (0 - 14)</label>
                 <input
+                  id="soilPH"
                   type="number"
+                  min="0"
+                  max="14"
                   step="0.1"
                   name="soilPH"
                   placeholder="e.g. 7.0"
@@ -200,10 +196,12 @@ function FarmerForm({ onBack }) {
               </div>
 
               <div className="input-group">
-                <label>Nitrogen (N)</label>
-
+                <label htmlFor="nitrogen">Nitrogen (N)</label>
                 <input
+                  id="nitrogen"
                   type="number"
+                  min="0"
+                  step="any"
                   name="nitrogen"
                   placeholder="Enter N value"
                   value={formData.nitrogen}
@@ -212,10 +210,12 @@ function FarmerForm({ onBack }) {
               </div>
 
               <div className="input-group">
-                <label>Phosphorus (P)</label>
-
+                <label htmlFor="phosphorus">Phosphorus (P)</label>
                 <input
+                  id="phosphorus"
                   type="number"
+                  min="0"
+                  step="any"
                   name="phosphorus"
                   placeholder="Enter P value"
                   value={formData.phosphorus}
@@ -224,28 +224,25 @@ function FarmerForm({ onBack }) {
               </div>
 
               <div className="input-group">
-                <label>Potassium (K)</label>
-
+                <label htmlFor="potassium">Potassium (K)</label>
                 <input
+                  id="potassium"
                   type="number"
+                  min="0"
+                  step="any"
                   name="potassium"
                   placeholder="Enter K value"
                   value={formData.potassium}
                   onChange={handleChange}
                 />
               </div>
-
             </div>
           </div>
 
-
           {/* ENVIRONMENT */}
-
           <div className="form-section">
-
             <div className="section-title">
               <span>03</span>
-
               <div>
                 <h2>Environmental Conditions</h2>
                 <p>Current environmental conditions</p>
@@ -253,12 +250,12 @@ function FarmerForm({ onBack }) {
             </div>
 
             <div className="form-grid">
-
               <div className="input-group">
-                <label>Average Temperature (°C)</label>
-
+                <label htmlFor="temperature">Average Temperature (°C)</label>
                 <input
+                  id="temperature"
                   type="number"
+                  step="any"
                   name="temperature"
                   placeholder="e.g. 28"
                   value={formData.temperature}
@@ -267,25 +264,23 @@ function FarmerForm({ onBack }) {
               </div>
 
               <div className="input-group">
-                <label>Average Rainfall (mm)</label>
-
+                <label htmlFor="rainfall">Average Rainfall (mm)</label>
                 <input
+                  id="rainfall"
                   type="number"
+                  min="0"
+                  step="any"
                   name="rainfall"
                   placeholder="e.g. 450"
                   value={formData.rainfall}
                   onChange={handleChange}
                 />
               </div>
-
             </div>
           </div>
 
-
           {/* SUBMIT */}
-
           <div className="form-submit-area">
-
             <div className="form-submit-text">
               <span className="submit-icon">
                 <IconSparkle />
@@ -293,24 +288,15 @@ function FarmerForm({ onBack }) {
 
               <div>
                 <strong>Ready to analyze?</strong>
-
-                <p>
-                  CropGen AI will analyze your farm conditions.
-                </p>
+                <p>CropGen AI will analyze your farm conditions.</p>
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="recommend-btn"
-            >
+            <button type="submit" className="recommend-btn">
               Get AI Recommendation <IconArrow />
             </button>
-
           </div>
-
         </form>
-
       </div>
     </div>
   );
