@@ -23,7 +23,7 @@ async function analyzeLeaf(file) {
   };
 }
 
-function LeafScan({ onBack }) {
+function Leafscan({ onBack }) {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState("");
   const [loading, setLoading] = useState(false);
@@ -209,4 +209,4 @@ function LeafScan({ onBack }) {
   );
 }
 
-export default LeafScan;
+export default Leafscan;
