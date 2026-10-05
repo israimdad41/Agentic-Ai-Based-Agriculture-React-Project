@@ -349,7 +349,7 @@ function App() {
             <span className="nav-icon"><IconChart /></span>
             <span>{t.profit}</span>
           </a>
-                    <a href="#leaf-scan" onClick={(e) => goTo(e, () => setShowLeafScan(true))}>
+                    <a href="#leaf-Scan" onClick={(e) => goTo(e, () => setShowLeafScan(true))}>
             <span className="nav-icon">🍃</span>
             <span>Leaf Disease Check</span>
           </a>
