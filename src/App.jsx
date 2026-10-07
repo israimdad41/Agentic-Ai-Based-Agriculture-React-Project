@@ -33,10 +33,10 @@ import "./App.css";
 ======================================== */
 const imageMap = {
   hero: new URL("./assets/cropgen/hero.jpg", import.meta.url).href,
-  iv2: new URL("./assets/cropgen/iv2.jpg", import.meta.url).href,
-  iv3: new URL("./assets/cropgen/iv3.jpg", import.meta.url).href,
-  mpt14: new URL("./assets/cropgen/mpt14.jpg", import.meta.url).href,
-  e107: new URL("./assets/cropgen/e107.jpg", import.meta.url).href,
+  iv2: new URL("./assets/cropgen/iv2.png", import.meta.url).href,
+  iv3: new URL("./assets/cropgen/iv3.png", import.meta.url).href,
+  mpt14: new URL("./assets/cropgen/mpt14.png", import.meta.url).href,
+  e107: new URL("./assets/cropgen/e107.png", import.meta.url).href,
   cta: new URL("./assets/cropgen/cta.jpg", import.meta.url).href,
 };
 
